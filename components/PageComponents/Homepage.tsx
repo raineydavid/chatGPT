@@ -135,7 +135,7 @@ export default function Homepage() {
                     <div className='h-[400px] xl:h-[450px] bg-[#00000080] p-5 text-slate-300 flex flex-col gap-3 overflow-auto text-sm'>
                         {chatContent.length > 0 ? (
                             chatContent.map((chat, index) => (
-                                <div className='flex flex-col gap-2'>
+                                <div className='flex flex-col gap-2' key={index}>
                                     <div className='bg-purple-600 max-w-[240px] sm:max-w-xs rounded-md p-2 w-max self-end'>{chat.Human}</div>
                                     <div className='bg-slate-600 max-w-[240px] sm:max-w-xs rounded-md p-2 w-max' ref={chatContent.length - 1 === index ? chatBoxRef : null}>
                                         {isLoading && chatContent.length - 1 === index ? (
