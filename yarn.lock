@@ -2155,6 +2155,11 @@ stop-iteration-iterator@^1.0.0:
   dependencies:
     internal-slot "^1.0.4"
 
+string-encode-decode@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/string-encode-decode/-/string-encode-decode-1.0.7.tgz#522afe19ab43744981e1194f06b5adac63d1f1b5"
+  integrity sha512-3rF1WP9FXfXz16kCNx81jgMN/FpNNh1jsFO7CX72DhqPMTR81qkbvYLuPKXSbwo9GLM6bDuCP2VdFERonkR2IQ==
+
 string.prototype.matchall@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/string.prototype.matchall/-/string.prototype.matchall-4.0.8.tgz#3bf85722021816dcd1bf38bb714915887ca79fd3"
