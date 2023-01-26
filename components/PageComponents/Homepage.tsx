@@ -87,13 +87,10 @@ export default function Homepage() {
         if (rememberChatContent && rememberChatContent.length > 0) {
             setChatContent(JSON.parse(rememberChatContent))
         }
-        if (inputRef) {
-            inputRef.current?.focus()
-        }
     }, [])
 
     return (
-        <main className={`${styles.main} relative flex flex-col justify-between items-center px-4 sm:px-12 xl:px-24 py-12 min-h-screen`}>
+        <main className={`${styles.main} relative flex flex-col justify-between items-center px-4 sm:px-12 xl:px-24 py-6 sm:py-12 min-h-screen gap-6 sm:gap-0`}>
             <div className={`${styles.bgPattern} absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] dark:bg-bottom dark:border-b dark:border-slate-100/5`} />
             <div className='max-w-8xl w-full flex flex-col sm:flex-row justify-between items-start sm:items-center h-16'>
                 <div className={`${kanit.className} flex items-center text-4xl xl:text-5xl text-slate-200`}>
