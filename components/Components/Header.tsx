@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Inter, Kanit } from '@next/font/google'
 import React from 'react'
 import { Player } from '@lottiefiles/react-lottie-player';
