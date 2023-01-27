@@ -7,19 +7,13 @@ import { FillButton, OutlineButton } from '../ButtonComponents';
 const inter = Inter({ subsets: ['latin'] })
 const kanit = Kanit({ subsets: ['latin'], weight: '700' })
 
-interface HeaderProps {
-    isExample: boolean;
-    isExamplePage?: boolean;
-}
-
-export default function Header({
-    isExample,
-    isExamplePage
-}: HeaderProps) {
+export default function Header() {
     const router = useRouter();
+    console.log(router.pathname)
+    const pageName = router.pathname === '/' ? 'home' : router.pathname === '/examples' ? 'example' : 'sub-example'
     return (
-        <div className='max-w-8xl w-full flex flex-col sm:flex-row justify-between items-start sm:items-center h-16' onClick={() => router.push('/')}>
-            <div className={`${kanit.className} flex items-center text-4xl xl:text-5xl text-slate-200 cursor-pointer z-10`}>
+        <div className='max-w-8xl w-full flex flex-col sm:flex-row justify-between items-start sm:items-center h-16'>
+            <div className={`${kanit.className} flex items-center text-4xl xl:text-5xl text-slate-200 cursor-pointer z-10`} onClick={() => router.push('/')}>
                 I
                 <Player
                     autoplay
@@ -30,7 +24,9 @@ export default function Header({
                 ChatGPT
             </div>
             <div className={`${inter.className} flex items-center gap-5 self-end sm:self-center`}>
-                {isExample ? <OutlineButton isIcon iconName='ic:round-keyboard-arrow-left' action={isExamplePage ? '/examples' : '/'} /> : <OutlineButton name='Examples' action='/examples' />}
+                {pageName === 'home' && <OutlineButton name='Examples' action='/examples' />}
+                {pageName === 'example' && <OutlineButton isIcon iconName='ic:round-keyboard-arrow-left' action='/' />}
+                {pageName === 'sub-example' && <OutlineButton isIcon iconName='ic:round-keyboard-arrow-left' action='/examples' />}
                 <FillButton name='Visit Creator' link="https://modernhealer.vercel.app" />
             </div>
         </div>
