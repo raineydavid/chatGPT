@@ -9,8 +9,7 @@ const kanit = Kanit({ subsets: ['latin'], weight: '700' })
 
 export default function Header() {
     const router = useRouter();
-    console.log(router.pathname)
-    const pageName = router.pathname === '/' ? 'home' : router.pathname === '/examples' ? 'example' : 'sub-example'
+    const pageName = router.pathname === '/' ? 'home' : router.pathname === '/examples' ? 'example' : 'sub-example';
     return (
         <div className='max-w-8xl w-full flex flex-col sm:flex-row justify-between items-start sm:items-center h-16'>
             <div className={`${kanit.className} flex items-center text-4xl xl:text-5xl text-slate-200 cursor-pointer z-10`} onClick={() => router.push('/')}>
