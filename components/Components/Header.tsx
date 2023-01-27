@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { Inter, Kanit } from '@next/font/google'
 import React from 'react'
 import { Player } from '@lottiefiles/react-lottie-player';
@@ -8,24 +8,17 @@ const inter = Inter({ subsets: ['latin'] })
 const kanit = Kanit({ subsets: ['latin'], weight: '700' })
 
 interface HeaderProps {
-    isExample: boolean
+    isExample: boolean;
+    isExamplePage?: boolean;
 }
 
 export default function Header({
-    isExample
+    isExample,
+    isExamplePage
 }: HeaderProps) {
     const router = useRouter();
-
-    const goExamples = () => {
-        router.push('/examples');
-    }
-
-    const goHome = () => {
-        router.push('/');
-    }
-
     return (
-        <div className='max-w-8xl w-full flex flex-col sm:flex-row justify-between items-start sm:items-center h-16' onClick={() => goHome()}>
+        <div className='max-w-8xl w-full flex flex-col sm:flex-row justify-between items-start sm:items-center h-16' onClick={() => router.push('/')}>
             <div className={`${kanit.className} flex items-center text-4xl xl:text-5xl text-slate-200 cursor-pointer z-10`}>
                 I
                 <Player
@@ -37,7 +30,7 @@ export default function Header({
                 ChatGPT
             </div>
             <div className={`${inter.className} flex items-center gap-5 self-end sm:self-center`}>
-                {isExample ? <OutlineButton name='Home' action={() => goHome()} /> : <OutlineButton name='Examples' action={() => goExamples()} />}
+                {isExample ? <OutlineButton isIcon iconName='ic:round-keyboard-arrow-left' action={isExamplePage ? '/examples' : '/'} /> : <OutlineButton name='Examples' action='/examples' />}
                 <FillButton name='Visit Creator' link="https://modernhealer.vercel.app" />
             </div>
         </div>
