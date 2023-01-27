@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Player } from '@lottiefiles/react-lottie-player';
 import { FillButton, OutlineButton, TransparencyButton } from '../ButtonComponents';
 import styles from '@/styles/Home.module.css'
+import Header from '../Components/Header';
 
 const inter = Inter({ subsets: ['latin'] })
 const kanit = Kanit({ subsets: ['latin'], weight: '700' })
@@ -90,25 +91,10 @@ export default function Homepage() {
     }, [])
 
     return (
-        <main className={`${styles.main} relative flex flex-col justify-between items-center px-4 sm:px-12 xl:px-24 py-6 sm:py-12 min-h-screen gap-6 sm:gap-0`}>
-            <div className={`${styles.bgPattern} absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] dark:bg-bottom dark:border-b dark:border-slate-100/5`} />
-            <div className='max-w-8xl w-full flex flex-col sm:flex-row justify-between items-start sm:items-center h-16'>
-                <div className={`${kanit.className} flex items-center text-4xl xl:text-5xl text-slate-200`}>
-                    I
-                    <Player
-                        autoplay
-                        loop
-                        src="https://assets7.lottiefiles.com/packages/lf20_kdhv2a5f.json"
-                        style={{ height: '60px', width: '60px' }}
-                    />
-                    ChatGPT
-                </div>
-                <div className={`${inter.className} flex items-center gap-5 self-end sm:self-center`}>
-                    <OutlineButton name='Examples' />
-                    <FillButton name='Visit Creator' link="https://modernhealer.vercel.app" />
-                </div>
-            </div>
-            <div className={`${styles.descSection} relative max-w-8xl w-full py-12 flex flex-col-reverse lg:flex-row justify-between items-start lg:items-center gap-12 lg:gap-0`}>
+        <main className='mainBg relative flex flex-col justify-between items-center px-4 sm:px-12 xl:px-24 py-6 sm:py-12 min-h-screen gap-6 sm:gap-0'>
+            <div className='bgPattern absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] dark:bg-bottom dark:border-b dark:border-slate-100/5' />
+            <Header isExample={false} />
+            <div className='descSection relative max-w-8xl w-full py-12 flex flex-col-reverse lg:flex-row justify-between items-start lg:items-center gap-12 lg:gap-0'>
                 <div className='flex flex-col gap-8 w-2/5 min-w-full lg:min-w-[450px] xl:min-w-[550px]'>
                     <div className={`${styles.descTitleGroup}`}>
                         <div className={`${kanit.className} ${styles.descTitle} text-7xl sm:text-8xl lg:text-7xl xl:text-8xl`}>ChatGPT made easy</div>

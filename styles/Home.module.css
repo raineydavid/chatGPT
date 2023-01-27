@@ -1,13 +1,3 @@
-.descSection {
-    height: calc(100vh - 10rem);
-}
-
-.main {
-    background-image: url('../public/image/landing/main_bg.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
 .descTitleGroup {
     display: grid;
     text-transform: uppercase;
@@ -40,11 +30,6 @@
     background-clip: text;
     -webkit-background-clip: text;
     transform: translateX(-0.02em);
-}
-
-.bgPattern {
-    -webkit-mask-image: linear-gradient(transparent, black);
-    background-image: url(../public/image/landing/download.svg);
 }
 
 @media screen and (max-width: 1024px) {

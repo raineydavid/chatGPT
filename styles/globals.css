@@ -133,6 +133,21 @@ a {
   text-decoration: none;
 }
 
+.mainBg {
+  background-image: url('../public/image/landing/main_bg.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.bgPattern {
+  -webkit-mask-image: linear-gradient(transparent, black);
+  background-image: url(../public/image/landing/download.svg);
+}
+
+.descSection {
+  height: calc(100vh - 10rem);
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
