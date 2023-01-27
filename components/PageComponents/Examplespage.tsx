@@ -1,6 +1,5 @@
 import React from 'react'
 import { UltraExtraButton } from '../ButtonComponents'
-import Header from '../Components/Header'
 import { ExampleList } from '../Constants/ExamplePage'
 
 export default function Examplespage() {

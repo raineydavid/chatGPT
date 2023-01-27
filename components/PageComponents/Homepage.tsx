@@ -3,7 +3,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Player } from '@lottiefiles/react-lottie-player';
 import { FillButton, OutlineButton, TransparencyButton } from '../ButtonComponents';
 import styles from '@/styles/Home.module.css'
-import Header from '../Components/Header';
 
 const inter = Inter({ subsets: ['latin'] })
 const kanit = Kanit({ subsets: ['latin'], weight: '700' })

@@ -12,7 +12,7 @@ interface fillProps {
     action?: () => void;
 }
 
-export default function fill(props: fillProps) {
+export default function FillButton(props: fillProps) {
     const { name, isIcon, iconName, link, action } = props;
     return (
         <button className={`${inter.className} relative w-max ${isIcon ? 'sm:p-1.5 p-2 lg:p-1.5 xl:p-2' : 'px-4 py-2 sm:px-5 sm:py-2.5 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5'} relative rounded group font-medium text-white font-medium inline-block`} onClick={() => link ? window.open(link, '_blank') : action}>

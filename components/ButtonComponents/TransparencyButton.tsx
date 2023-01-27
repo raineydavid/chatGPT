@@ -12,7 +12,7 @@ interface outlineProps {
     action?: () => void;
 }
 
-export default function outline(props: outlineProps) {
+export default function TransparencyButton(props: outlineProps) {
     const { name, isIcon, iconName, link, action } = props
     return (
         <button className={`${inter.className} relative ${isIcon ? 'sm:p-1.5 p-2 lg:p-1.5 xl:p-2' : 'px-4 py-2 sm:px-5 sm:py-2.5 lg:px-4 lg:py-2 xl:px-5 xl:py-2.5'} overflow-hidden font-medium text-gray-600 bg-transprent border-none shadow-inner group outline-none`} onClick={() => link ? window.open(link, '_blank') : action}>
