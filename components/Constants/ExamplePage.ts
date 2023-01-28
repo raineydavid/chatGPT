@@ -11,14 +11,14 @@ export const ExampleList: ExampleListTypes[] = [
         link: '/examples/real-time-chat'
     },
     {
-        name: 'Grammer correction',
+        name: 'Grammar correction',
         icon: 'fluent:text-grammar-wand-20-regular',
-        link: '/examples/grammer-correction'
+        link: '/examples/grammar-correction'
     },
     {
         name: 'English to other languages',
         icon: 'bi:translate',
-        link: '/examples/english-to-other'
+        link: '/examples/english-to-others'
     },
     {
         name: 'Python to natural language',

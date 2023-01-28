@@ -103,6 +103,7 @@ export default function Homepage() {
                 inputValue={inputValue}
                 chatBoxRef={chatBoxRef}
                 inputRef={inputRef}
+                isRememberChat
                 title='Real time chat'
             />
         </div>

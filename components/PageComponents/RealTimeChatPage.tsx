@@ -24,8 +24,8 @@ export default function RealTimeChatPage() {
         } else if (inputValue) {
             try {
                 setIsLoading(true);
-                setInputValue('')
-                setChatContent([...chatContent, { Human: inputValue, AI: '...' }])
+                setInputValue('');
+                setChatContent([...chatContent, { Human: inputValue, AI: '...' }]);
                 const res = await fetch(`/api/openai-chat`, {
                     body: JSON.stringify(prompt + `Human:${inputValue}\nAI:`),
                     headers: {
@@ -94,9 +94,10 @@ export default function RealTimeChatPage() {
                     chatBoxRef={chatBoxRef}
                     inputRef={inputRef}
                     title='Real time chat'
+                    isRememberChat
                 />
-                <div className='max-w-md'>
-                    <div className={`text-2xl ${interB.className}`}>Prompt</div>
+                <div className='max-w-md text-sm'>
+                    <div className={`text-xl ${interB.className}`}>Prompt</div>
                     <div className={`${inter.className} flex flex-col rounded-xl p-3 px-5 mt-1 bg-[#3a0e1f73]`}>
                         <div>The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.</div><br />
                         <div><span className='font-bold'>Human:</span> Hello, My name is Adan Cui.</div>
@@ -104,11 +105,11 @@ export default function RealTimeChatPage() {
                         <div><span className='font-bold'>Human:</span> Do you remember my name?</div>
                         <div><span className='font-bold'>AI:</span></div>
                     </div>
-                    <div className={`text-2xl mt-5 ${interB.className}`}>Response</div>
+                    <div className={`text-xl mt-5 ${interB.className}`}>Response</div>
                     <div className={`${inter.className} rounded-xl p-3 px-5 mt-1 bg-[#0e3a0f73]`}>
                         Yes, of course I remember! Your name is Adan Cui. Is there anything else I can do for you?
                     </div>
-                    <div className={`text-2xl mt-5 ${interB.className}`}>Keyword</div>
+                    <div className={`text-xl mt-5 ${interB.className}`}>Keyword</div>
                     <div className={`${inter.className} rounded-xl p-3 px-5 mt-1 bg-[#3a2c0e73]`}>
                         <span className='font-bold'>/reset</span>: Reset all chats between AI bots.
                     </div>

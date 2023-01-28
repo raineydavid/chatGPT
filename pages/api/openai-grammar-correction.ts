@@ -13,15 +13,15 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    console.log(req.body)
     const response = await openAi.createCompletion({
         model: "text-davinci-003",
         prompt: req.body,
-        temperature: 0.9,
+        temperature: 0,
         max_tokens: 2048,
-        top_p: 1,
+        top_p: 1.0,
         frequency_penalty: 0.0,
-        presence_penalty: 0.6,
-        stop: [" Human:", " AI:"],
+        presence_penalty: 0.0,
     });
 
     res.status(200).json(response.data.choices[0].text)
