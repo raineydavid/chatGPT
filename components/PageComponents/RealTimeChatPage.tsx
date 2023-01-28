@@ -36,7 +36,7 @@ export default function RealTimeChatPage() {
                 const data = await res.json();
                 setPrompt(prompt + `Human:${inputValue}\nAI:${data}\n`)
                 setChatContent([...chatContent, { Human: inputValue, AI: data }])
-                localStorage.setItem('chatContent', JSON.stringify([...chatContent, { Human: inputValue, AI: data }]))
+                localStorage.setItem('realTimeChat', JSON.stringify([...chatContent, { Human: inputValue, AI: data }]))
                 localStorage.setItem('rememberPrompt', (prompt + `Human:${inputValue}\nAI:${data}\n`))
                 setIsLoading(false);
             } catch {
@@ -46,7 +46,7 @@ export default function RealTimeChatPage() {
     }
 
     const handleClearHistory = () => {
-        localStorage.removeItem('chatContent')
+        localStorage.removeItem('realTimeChat')
         localStorage.removeItem('rememberPrompt')
         setChatContent([])
         setInputValue('')
@@ -67,7 +67,7 @@ export default function RealTimeChatPage() {
     }, [JSON.stringify(chatContent)])
 
     useEffect(() => {
-        const rememberChatContent = localStorage.getItem('chatContent')
+        const rememberChatContent = localStorage.getItem('realTimeChat')
         const rememberPrompt = localStorage.getItem('rememberPrompt')
         if (rememberPrompt && rememberPrompt.length > 0) {
             setPrompt(rememberPrompt)

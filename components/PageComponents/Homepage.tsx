@@ -62,15 +62,6 @@ export default function Homepage() {
     }
 
     useEffect(() => {
-        if (inputRef) {
-            inputRef.current?.focus()
-        }
-        if (chatBoxRef) {
-            chatBoxRef.current?.scrollIntoView({ behavior: "smooth" });
-        }
-    }, [JSON.stringify(chatContent)])
-
-    useEffect(() => {
         const rememberChatContent = localStorage.getItem('chatContent')
         const rememberPrompt = localStorage.getItem('rememberPrompt')
         if (rememberPrompt && rememberPrompt.length > 0) {

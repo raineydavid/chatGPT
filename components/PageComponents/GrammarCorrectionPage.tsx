@@ -61,15 +61,6 @@ export default function GrammarCorrection() {
     }
 
     useEffect(() => {
-        if (inputRef) {
-            inputRef.current?.focus()
-        }
-        if (chatBoxRef) {
-            chatBoxRef.current?.scrollIntoView({ behavior: "smooth" });
-        }
-    }, [JSON.stringify(chatHistory)])
-
-    useEffect(() => {
         const rememberHistory = localStorage.getItem('grammarCorrectionHistory')
         if (rememberHistory && rememberHistory.length > 0) {
             setChatHistory(JSON.parse(rememberHistory))

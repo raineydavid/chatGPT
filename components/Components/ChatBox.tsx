@@ -1,5 +1,5 @@
 import { Inter } from '@next/font/google'
-import React, { Dispatch, RefObject, SetStateAction, useState } from 'react'
+import React, { Dispatch, RefObject, SetStateAction, useEffect } from 'react'
 import { Player } from '@lottiefiles/react-lottie-player';
 import { TransparencyButton } from '../ButtonComponents';
 import { ChatContentTypes } from '../PageComponents/Homepage';
@@ -18,6 +18,7 @@ interface ChatBoxTypes {
     inputRef: RefObject<HTMLInputElement>;
     isRememberChat: boolean;
     isShowHistory?: boolean;
+    isSelectLanguages?: boolean;
     setIsShowHistory?: Dispatch<SetStateAction<boolean>>;
     title: string;
 }
@@ -33,10 +34,11 @@ export default function ChatBox({
     inputRef,
     isRememberChat,
     isShowHistory,
+    isSelectLanguages,
     setIsShowHistory,
     title
 }: ChatBoxTypes) {
-    const overview = process.env.MY_OVERVIEW;
+    const overview = 'I am prepared to speak with you. Fire away!';
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter') {
@@ -55,6 +57,15 @@ export default function ChatBox({
             setIsShowHistory(false)
         }
     }
+
+    useEffect(() => {
+        if (inputRef) {
+            inputRef.current?.focus()
+        }
+        if (chatBoxRef) {
+            chatBoxRef.current?.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [JSON.stringify(chatContent)])
 
     return (
         <div className={`${inter.className} relative max-w-xl w-full text-md self-center`} id='chatBox'>
@@ -99,14 +110,22 @@ export default function ChatBox({
                             </div>
                         ))
                     ) : (
-                        <div>{overview}</div>
+                        <div className='w-full h-full flex flex-col items-center justify-center'>
+                            <Player
+                                autoplay
+                                loop
+                                src="https://assets7.lottiefiles.com/packages/lf20_pmgmuthj.json"
+                                style={{ height: '250px', width: '250px' }}
+                            />
+                            <div>{overview}</div>
+                        </div>
                     ) : isShowHistory ? (
                         <div>
                             <div className='flex items-center gap-2'>
-                                <div className='w-7 h-7 rounded-full bg-green-600 flex items-center justify-center cursor-pointer' onClick={() => handleHiddenHistory()}>
+                                <div className='w-6 h-6 rounded-full bg-green-600 flex items-center justify-center cursor-pointer' onClick={() => handleHiddenHistory()}>
                                     <Icon icon='ic:round-keyboard-arrow-left' className='text-2xl' />
                                 </div>
-                                <div className='w-32 h-7 flex items-center justify-center rounded-full bg-yellow-600 text-base cursor-pointer'>Chat History</div>
+                                <div className='w-28 h-6 flex items-center justify-center rounded-full bg-transition border border-yellow-600 text-yellow-600 cursor-pointer'>Chat History</div>
                             </div>
                             <div className='p-5 flex flex-col gap-4'>
                                 {chatContent.length === 0 ? (
@@ -124,15 +143,23 @@ export default function ChatBox({
                             autoplay
                             loop
                             src="https://assets1.lottiefiles.com/packages/lf20_fyye8szy.json"
-                            style={{ height: '50px', width: '50px', marginBottom: '-15px', marginTop: '-15px' }}
+                            style={{ height: '50px', width: '50px' }}
                         />
                     ) : chatContent.length > 0 ? (
                         <>
-                            <div className='text-base'><span className='font-bold'>You:</span> {chatContent[chatContent.length - 1].AI}</div>
-                            <div className='text-base'><span className='font-bold'>AI:</span> {chatContent[chatContent.length - 1].Human}</div>
+                            <div className='text-base'><span className='font-bold'>You:</span> {chatContent[chatContent.length - 1].Human}</div>
+                            <div className='text-base'><span className='font-bold'>AI:</span> {chatContent[chatContent.length - 1].AI}</div>
                         </>
                     ) : (
-                        <div>{overview}</div>
+                        <div className='w-full h-full flex flex-col items-center justify-center'>
+                            <Player
+                                autoplay
+                                loop
+                                src="https://assets7.lottiefiles.com/packages/lf20_pmgmuthj.json"
+                                style={{ height: '250px', width: '250px' }}
+                            />
+                            <div>{overview}</div>
+                        </div>
                     )
                 }
             </div>

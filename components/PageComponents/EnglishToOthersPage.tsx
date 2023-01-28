@@ -13,7 +13,7 @@ export default function EnglishToOthersPage() {
     const [inputValue, setInputValue] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [chatHistory, setChatHistory] = useState<ChatContentTypes[]>([]);
-    const [isShowHistory, setIsShowHistory] = useState<boolean>(false)
+    const [isShowHistory, setIsShowHistory] = useState<boolean>(false);
 
     const chatBoxRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
@@ -61,15 +61,6 @@ export default function EnglishToOthersPage() {
     }
 
     useEffect(() => {
-        if (inputRef) {
-            inputRef.current?.focus()
-        }
-        if (chatBoxRef) {
-            chatBoxRef.current?.scrollIntoView({ behavior: "smooth" });
-        }
-    }, [JSON.stringify(chatHistory)])
-
-    useEffect(() => {
         const rememberHistory = localStorage.getItem('englishToOthers')
         if (rememberHistory && rememberHistory.length > 0) {
             setChatHistory(JSON.parse(rememberHistory))
@@ -96,16 +87,20 @@ export default function EnglishToOthersPage() {
                     isShowHistory={isShowHistory}
                     setIsShowHistory={setIsShowHistory}
                     title='English to other languages'
+                    isSelectLanguages
                 />
                 <div className='max-w-md text-sm'>
                     <div className={`text-xl ${interB.className}`}>Prompt</div>
                     <div className={`${inter.className} flex flex-col rounded-xl p-3 px-5 mt-1 bg-[#3a0e1f73]`}>
-                        <div>Correct this to standard English:</div><br />
-                        <div>She no went to the market.</div>
+                        <div>Translate this into 1. French, 2. Spanish and 3. Japanese:</div><br />
+                        <div>What rooms do you have available?</div><br />
+                        1.
                     </div>
                     <div className={`text-xl mt-5 ${interB.className}`}>Response</div>
                     <div className={`${inter.className} rounded-xl p-3 px-5 mt-1 bg-[#0e3a0f73]`}>
-                        She did not go to the market.
+                        <div>Quels sont les chambres que vous avez disponibles?</div>
+                        <div>2. ¿Qué habitaciones tienes disponibles?</div>
+                        <div>3. どの部屋が利用可能ですか？</div>
                     </div>
                     <div className={`text-xl mt-5 ${interB.className}`}>Keyword</div>
                     <div className={`${inter.className} rounded-xl p-3 px-5 mt-1 bg-[#3a2c0e73]`}>
