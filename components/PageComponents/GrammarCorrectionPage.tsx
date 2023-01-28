@@ -14,14 +14,14 @@ export default function GrammarCorrection() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [chatHistory, setChatHistory] = useState<ChatContentTypes[]>([]);
     const [isShowHistory, setIsShowHistory] = useState<boolean>(false);
-    const [isShowHint, setIsShowHint] = useState<boolean>(false);
+    const [isShowHint, setIsShowHint] = useState<string>('');
 
     const chatBoxRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
 
     const handleGetAnswer = async () => {
         if (inputValue === '') {
-            setIsShowHint(true)
+            setIsShowHint('input')
         } else if (inputValue === '/reset') {
             handleClearHistory()
         } else if (inputValue === '/history') {
@@ -58,7 +58,7 @@ export default function GrammarCorrection() {
         setInputValue('')
         setIsLoading(false)
         setIsShowHistory(false)
-        setIsShowHint(false)
+        setIsShowHint('')
         if (inputRef) {
             inputRef.current?.focus()
         }

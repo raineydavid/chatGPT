@@ -289,7 +289,7 @@ export default function ChatBox({
                                     </div>
                                 ))}
                             </div>
-                            {SelectLanguages}
+                            {isSelectLanguages && SelectLanguages}
                         </>
                     ) : isLoading ? (
                         <Player
@@ -309,7 +309,7 @@ export default function ChatBox({
                                     ))}
                                 </div>
                             )}
-                            {SelectLanguages}
+                            {isSelectLanguages && SelectLanguages}
                             <div className='text-base text-center'><span className='font-bold'>You:</span> {chatContent[chatContent.length - 1].Human}</div>
                             <div className='text-base text-center'><span className='font-bold'>AI:</span> {chatContent[chatContent.length - 1].AI}</div>
                         </>
