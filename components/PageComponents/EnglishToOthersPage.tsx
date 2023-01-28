@@ -41,7 +41,7 @@ export default function EnglishToOthersPage() {
                 });
                 const data = await res.json();
                 setChatHistory([...chatHistory, { Human: inputValue, AI: data }])
-                localStorage.setItem('grammarCorrectionHistory', JSON.stringify([...chatHistory, { Human: inputValue, AI: data }]))
+                localStorage.setItem('englishToOthers', JSON.stringify([...chatHistory, { Human: inputValue, AI: data }]))
                 setIsLoading(false);
             } catch {
                 handleGetAnswer();
@@ -50,7 +50,7 @@ export default function EnglishToOthersPage() {
     }
 
     const handleClearHistory = () => {
-        localStorage.removeItem('grammarCorrectionHistory')
+        localStorage.removeItem('englishToOthers')
         setChatHistory([])
         setInputValue('')
         setIsLoading(false)
@@ -70,7 +70,7 @@ export default function EnglishToOthersPage() {
     }, [JSON.stringify(chatHistory)])
 
     useEffect(() => {
-        const rememberHistory = localStorage.getItem('grammarCorrectionHistory')
+        const rememberHistory = localStorage.getItem('englishToOthers')
         if (rememberHistory && rememberHistory.length > 0) {
             setChatHistory(JSON.parse(rememberHistory))
         }
@@ -79,8 +79,8 @@ export default function EnglishToOthersPage() {
     return (
         <div className='descSection w-full max-w-7xl flex flex-col justify-evenly'>
             <div className='flex items-center gap-2'>
-                <Icon icon='fluent:text-grammar-wand-20-regular' className='text-purple-500 text-3xl' />
-                <div className={`${interB.className} text-3xl text-purple-500`}>Grammar Correction</div>
+                <Icon icon='bi:translate' className='text-purple-500 text-3xl' />
+                <div className={`${interB.className} text-3xl text-purple-500`}>English to other Languages</div>
             </div>
             <div className='flex justify-around'>
                 <ChatBox
@@ -95,7 +95,7 @@ export default function EnglishToOthersPage() {
                     isRememberChat={false}
                     isShowHistory={isShowHistory}
                     setIsShowHistory={setIsShowHistory}
-                    title='Grammar Correction'
+                    title='English to other languages'
                 />
                 <div className='max-w-md text-sm'>
                     <div className={`text-xl ${interB.className}`}>Prompt</div>

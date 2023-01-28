@@ -112,7 +112,7 @@ export default function ChatBox({
                                 {chatContent.length === 0 ? (
                                     <div>No History!</div>
                                 ) : chatContent.map((chat, index) => (
-                                    <div>
+                                    <div key={index}>
                                         <div className='text-green-600'><span className='font-bold'>You:</span> {chat.Human}</div>
                                         <div className='text-yellow-600'><span className='font-bold'>AI:</span> {chat.AI}</div>
                                     </div>
