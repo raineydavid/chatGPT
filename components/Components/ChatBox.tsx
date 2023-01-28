@@ -18,12 +18,14 @@ interface ChatBoxTypes {
     chatBoxRef: RefObject<HTMLDivElement>;
     inputRef: RefObject<HTMLInputElement>;
     isRememberChat: boolean;
-    isShowHint: boolean;
-    setIsShowHint: Dispatch<SetStateAction<boolean>>;
+    isShowHint: string;
+    setIsShowHint: Dispatch<SetStateAction<string>>;
     isShowHistory?: boolean;
     setIsShowHistory?: Dispatch<SetStateAction<boolean>>;
     showSelectLanguages?: boolean;
     setShowSelectLanguages?: Dispatch<SetStateAction<boolean>>;
+    selectedLanguages?: string[];
+    setSelectedLanguages?: Dispatch<SetStateAction<string[]>>;
     isSelectLanguages?: boolean;
     title: string;
 }
@@ -44,16 +46,18 @@ export default function ChatBox({
     setIsShowHistory,
     showSelectLanguages,
     setShowSelectLanguages,
+    selectedLanguages,
+    setSelectedLanguages,
     isSelectLanguages,
     title
 }: ChatBoxTypes) {
     const overview = 'I am prepared to speak with you. Fire away!';
 
-    const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
     const [allLanguages, setAllLanguages] = useState<string[]>(LanguageList);
+    const [searchLangInput, setSearchLangInput] = useState<string>('');
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
-        setIsShowHint(false)
+        setIsShowHint('')
         if (event.key === 'Enter') {
             getAnswerFunc()
         }
@@ -65,7 +69,7 @@ export default function ChatBox({
                 setShowSelectLanguages(false)
             }
             setIsShowHistory(true)
-            setIsShowHint(false)
+            setIsShowHint('')
         }
     }
 
@@ -75,19 +79,51 @@ export default function ChatBox({
                 setShowSelectLanguages(false)
             }
             setIsShowHistory(false)
-            setIsShowHint(false)
+            setIsShowHint('')
         }
     }
 
     const handleClickLanguages = (language: string) => {
-        if (selectedLanguages.includes(language)) {
-            setSelectedLanguages(selectedLanguages.filter(item => item !== language))
-            setAllLanguages([...allLanguages, language])
-        } else {
-            setSelectedLanguages([...selectedLanguages, language])
-            setAllLanguages(allLanguages.filter(item => item !== language))
+        if (selectedLanguages && setSelectedLanguages) {
+            if (selectedLanguages.includes(language)) {
+                const deSelectedLanguages = selectedLanguages.filter(item => item !== language);
+                setSelectedLanguages(deSelectedLanguages);
+                const result = handleFilterLangs(searchLangInput, deSelectedLanguages);
+                setAllLanguages(result);
+                localStorage.setItem('selectedLangs', JSON.stringify(deSelectedLanguages))
+            } else {
+                const selectedLangs = [...selectedLanguages, language]
+                setSelectedLanguages(selectedLangs);
+                setAllLanguages(allLanguages.filter(item => item !== language));
+                localStorage.setItem('selectedLangs', JSON.stringify(selectedLangs))
+            }
         }
     }
+
+    const handleSearchLanguageInput = (e: string) => {
+        if (selectedLanguages) {
+            setSearchLangInput(e);
+            const result = handleFilterLangs(e, selectedLanguages);
+            setAllLanguages(result);
+        }
+    }
+
+    const handleFilterLangs = (value: string, langsArray: string[]) => {
+        const searchResult = LanguageList.filter(item => item.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
+        const finalResult = searchResult.filter(item => !langsArray.includes(item));
+        return finalResult;
+    }
+
+    useEffect(() => {
+        const selectedLangs = localStorage.getItem('selectedLangs')
+        if (selectedLangs && JSON.parse(selectedLangs).length > 0) {
+            if (setSelectedLanguages) {
+                setSelectedLanguages(JSON.parse(selectedLangs));
+            }
+            const result = handleFilterLangs('', JSON.parse(selectedLangs))
+            setAllLanguages(result)
+        }
+    }, [])
 
     useEffect(() => {
         if (inputRef) {
@@ -97,6 +133,32 @@ export default function ChatBox({
             chatBoxRef.current?.scrollTo({ top: chatBoxRef.current.scrollHeight, behavior: "smooth" });
         }
     }, [JSON.stringify(chatContent)])
+
+    useEffect(() => {
+        handleSearchLanguageInput(searchLangInput)
+    }, [searchLangInput])
+
+    const SelectLanguages = (
+        <div
+            className='absolute bottom-1 right-2 underline underline-offset-2 cursor-pointer'
+            onClick={() => {
+                setShowSelectLanguages && setShowSelectLanguages(true)
+                setSearchLangInput('')
+                setIsShowHint('')
+            }}
+        >
+            Select Languages
+        </div>
+    )
+
+    const arrowAnimation = (
+        <Player
+            autoplay
+            loop
+            src="https://assets9.lottiefiles.com/packages/lf20_uxud7cot.json"
+            style={{ height: '50px', width: '50px' }}
+        />
+    )
 
     return (
         <div className={`${inter.className} relative max-w-auto lg:max-w-xl w-full text-md self-center`} id='chatBox'>
@@ -122,7 +184,7 @@ export default function ChatBox({
                     </div>
                 </div>
             </div>
-            <div className={`h-[450px] relative bg-[#00000080] p-5 text-slate-300 flex flex-col gap-3 overflow-auto text-sm ${!isRememberChat && !isShowHistory && !isLoading && chatContent.length > 0 && 'flex items-center justify-center'}`} ref={chatBoxRef}>
+            <div className={`h-[450px] relative bg-[#00000080] p-5 text-slate-300 flex flex-col gap-3 overflow-auto text-sm ${!isRememberChat && !isShowHistory && !isLoading && !showSelectLanguages && chatContent.length > 0 && 'flex items-center justify-center'}`} ref={chatBoxRef}>
                 {isRememberChat ?
                     chatContent.length > 0 ? (
                         chatContent.map((chat, index) => (
@@ -151,26 +213,30 @@ export default function ChatBox({
                             <div>{overview}</div>
                         </div>
                     ) : showSelectLanguages ? (
-                        <>
+                        <div className='flex flex-col gap-4'>
                             <div className='flex items-center gap-2'>
                                 <div className='w-6 h-6 rounded-full bg-green-600 flex items-center justify-center cursor-pointer' onClick={() => handleHiddenHistory()}>
                                     <Icon icon='ic:round-keyboard-arrow-left' className='text-2xl' />
                                 </div>
                                 <div className='w-36 h-6 flex items-center justify-center rounded-full bg-transition border border-yellow-600 text-yellow-600 cursor-pointer'>Select Languages</div>
                             </div>
-                            <input className='mx-3 sm:mx-4 rounded-full py-2 px-4 outline-none border-none' />
+                            <input
+                                className='mx-3 sm:mx-4 rounded-full py-2 px-4 outline-none border-none'
+                                onChange={(e) => handleSearchLanguageInput(e.target.value)}
+                                value={searchLangInput}
+                            />
                             <div className='px-4'>
                                 <div>Selected</div>
                                 <div className='flex flex-wrap gap-2 p-1'>
-                                    {selectedLanguages.map((language) => (
+                                    {selectedLanguages && selectedLanguages.map((language) => (
                                         <div
-                                            className={`flex items-center justify-center ${selectedLanguages.includes(language) ? 'bg-purple-500 text-white' : 'bg-transparent text-purple-500'} border border-purple-500 w-max px-3 h-6 rounded-full cursor-pointer transition-all duration-500`}
+                                            className={`flex items-center justify-center bg-purple-500 text-white border border-purple-500 w-max px-3 h-6 rounded-full cursor-pointer transition-all duration-500`}
                                             onClick={() => handleClickLanguages(language)}
                                             key={language}
                                         >
                                             {selectedLanguages.includes(language) ? (
                                                 <div className='flex items-center'>
-                                                    <Icon icon='material-symbols:check' className={`text-xl ${selectedLanguages.includes(language) ? 'opacity-100' : 'opacity-0'}`} />
+                                                    <Icon icon='material-symbols:check' className='text-xl' />
                                                     {language}
                                                 </div>
                                             ) : (
@@ -185,13 +251,13 @@ export default function ChatBox({
                                 <div className='flex flex-wrap gap-2 p-1'>
                                     {allLanguages.map((language) => (
                                         <div
-                                            className={`flex items-center justify-center ${selectedLanguages.includes(language) ? 'bg-purple-500 text-white' : 'bg-transparent text-purple-500'} border border-purple-500 w-max px-3 h-6 rounded-full cursor-pointer transition-all duration-500`}
+                                            className={`flex items-center justify-center bg-transparent text-purple-500 border border-purple-500 w-max px-3 h-6 rounded-full cursor-pointer transition-all duration-500`}
                                             onClick={() => handleClickLanguages(language)}
                                             key={language}
                                         >
-                                            {selectedLanguages.includes(language) ? (
+                                            {selectedLanguages && selectedLanguages.includes(language) ? (
                                                 <div className='flex items-center'>
-                                                    <Icon icon='material-symbols:check' className={`text-xl ${selectedLanguages.includes(language) ? 'opacity-100' : 'opacity-0'}`} />
+                                                    <Icon icon='material-symbols:check' className='text-xl' />
                                                     {language}
                                                 </div>
                                             ) : (
@@ -201,14 +267,17 @@ export default function ChatBox({
                                     ))}
                                 </div>
                             </div>
-                        </>
+                        </div>
                     ) : isShowHistory ? (
                         <>
                             <div className='flex items-center gap-2'>
                                 <div className='w-6 h-6 rounded-full bg-green-600 flex items-center justify-center cursor-pointer' onClick={() => handleHiddenHistory()}>
                                     <Icon icon='ic:round-keyboard-arrow-left' className='text-2xl' />
                                 </div>
-                                <div className='w-28 h-6 flex items-center justify-center rounded-full bg-transition border border-yellow-600 text-yellow-600 cursor-pointer'>Chat History</div>
+                                <div className='w-28 h-6 flex items-center justify-center rounded-full bg-transition border border-yellow-600 text-yellow-600 cursor-pointer'>History</div>
+                                <div className='w-6 h-6 rounded-full bg-rose-600 flex items-center justify-center cursor-pointer' onClick={() => clearFunc()}>
+                                    <Icon icon='material-symbols:delete' className='text-xl' />
+                                </div>
                             </div>
                             <div className='px-5 py-2 flex flex-col gap-4'>
                                 {chatContent.length === 0 ? (
@@ -220,6 +289,7 @@ export default function ChatBox({
                                     </div>
                                 ))}
                             </div>
+                            {SelectLanguages}
                         </>
                     ) : isLoading ? (
                         <Player
@@ -230,11 +300,30 @@ export default function ChatBox({
                         />
                     ) : chatContent.length > 0 ? (
                         <>
-                            <div className='text-base'><span className='font-bold'>You:</span> {chatContent[chatContent.length - 1].Human}</div>
-                            <div className='text-base'><span className='font-bold'>AI:</span> {chatContent[chatContent.length - 1].AI}</div>
+                            {selectedLanguages && selectedLanguages.length > 0 && (
+                                <div className='w-full flex flex-wrap gap-2 absolute top-0 left-0 p-2 bg-[#000000030]'>
+                                    {selectedLanguages.map((language) => (
+                                        <div key={language} className="bg-purple-600 w-max px-2 rounded-full">
+                                            {language}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                            {SelectLanguages}
+                            <div className='text-base text-center'><span className='font-bold'>You:</span> {chatContent[chatContent.length - 1].Human}</div>
+                            <div className='text-base text-center'><span className='font-bold'>AI:</span> {chatContent[chatContent.length - 1].AI}</div>
                         </>
                     ) : (
                         <div className='w-full h-full flex flex-col items-center justify-center'>
+                            {selectedLanguages && selectedLanguages.length > 0 && (
+                                <div className='w-full flex flex-wrap gap-2 absolute top-0 left-0 p-2 bg-[#000000030]'>
+                                    {selectedLanguages.map((language) => (
+                                        <div key={language} className="bg-purple-600 w-max px-2 rounded-full">
+                                            {language}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                             <Player
                                 autoplay
                                 loop
@@ -242,18 +331,16 @@ export default function ChatBox({
                                 style={{ height: '250px', width: '250px' }}
                             />
                             <div>{overview}</div>
-                            {isSelectLanguages && <div className='underline underline-offset-2 cursor-pointer' onClick={() => setShowSelectLanguages && setShowSelectLanguages(true)}>Select Languages</div>}
+                            {isSelectLanguages && SelectLanguages}
                         </div>
                     )
                 }
             </div>
-            {isShowHint && <div className='absolute bottom-10 left-0'>
-                <Player
-                    autoplay
-                    loop
-                    src="https://assets9.lottiefiles.com/packages/lf20_uxud7cot.json"
-                    style={{ height: '50px', width: '50px' }}
-                />
+            {isShowHint === 'input' && <div className='absolute bottom-10 left-0'>
+                {arrowAnimation}
+            </div>}
+            {isShowHint === 'language' && <div className={`absolute ${showSelectLanguages ? 'top-8 left-48 rotate-90' : 'bottom-7 right-32 -rotate-90'}`}>
+                {arrowAnimation}
             </div>}
             <div className='w-full bg-slate-800 rounded-b-md flex overflow-hidden'>
                 <input
