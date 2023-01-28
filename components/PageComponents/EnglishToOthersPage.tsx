@@ -58,6 +58,7 @@ export default function EnglishToOthersPage() {
         setInputValue('')
         setIsLoading(false)
         setIsShowHistory(false)
+        setIsShowHint(false)
         if (inputRef) {
             inputRef.current?.focus()
         }

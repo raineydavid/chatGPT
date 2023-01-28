@@ -55,6 +55,7 @@ export default function RealTimeChatPage() {
         setInputValue('')
         setPrompt(defaultPromot as string)
         setIsLoading(false)
+        setIsShowHint(false)
         if (inputRef) {
             inputRef.current?.focus()
         }

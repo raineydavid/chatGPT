@@ -58,6 +58,7 @@ export default function GrammarCorrection() {
         setInputValue('')
         setIsLoading(false)
         setIsShowHistory(false)
+        setIsShowHint(false)
         if (inputRef) {
             inputRef.current?.focus()
         }

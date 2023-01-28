@@ -35,6 +35,8 @@ export default function ChatBox({
     chatBoxRef,
     inputRef,
     isRememberChat,
+    isShowHint,
+    setIsShowHint,
     isShowHistory,
     isSelectLanguages,
     setIsShowHistory,
@@ -43,6 +45,7 @@ export default function ChatBox({
     const overview = 'I am prepared to speak with you. Fire away!';
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
+        setIsShowHint(false)
         if (event.key === 'Enter') {
             getAnswerFunc()
         }
@@ -51,12 +54,14 @@ export default function ChatBox({
     const handleShowHistory = () => {
         if (setIsShowHistory) {
             setIsShowHistory(true)
+            setIsShowHint(false)
         }
     }
 
     const handleHiddenHistory = () => {
         if (setIsShowHistory) {
             setIsShowHistory(false)
+            setIsShowHint(false)
         }
     }
 
@@ -93,7 +98,7 @@ export default function ChatBox({
                     </div>
                 </div>
             </div>
-            <div className={`h-[400px] xl:h-[450px] bg-[#00000080] p-5 text-slate-300 flex flex-col gap-3 overflow-auto text-sm ${!isRememberChat && !isShowHistory && !isLoading && chatContent.length > 0 && 'flex items-center justify-center'}`}>
+            <div className={`h-[400px] xl:h-[450px] relative bg-[#00000080] p-5 text-slate-300 flex flex-col gap-3 overflow-auto text-sm ${!isRememberChat && !isShowHistory && !isLoading && chatContent.length > 0 && 'flex items-center justify-center'}`}>
                 {isRememberChat ?
                     chatContent.length > 0 ? (
                         chatContent.map((chat, index) => (
@@ -165,8 +170,25 @@ export default function ChatBox({
                     )
                 }
             </div>
+            {isShowHint && <div className='absolute bottom-10 left-0'>
+                <Player
+                    autoplay
+                    loop
+                    src="https://assets9.lottiefiles.com/packages/lf20_uxud7cot.json"
+                    style={{ height: '50px', width: '50px' }}
+                />
+            </div>}
             <div className='w-full bg-slate-800 rounded-b-md flex overflow-hidden'>
-                <input className='w-full bg-slate-800 outline-none border-none rounded-b-md py-2 px-4' placeholder='Ask me anything...' value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={(e) => handleKeyDown(e)} disabled={isLoading} ref={inputRef} autoFocus />
+                <input
+                    className='w-full bg-slate-800 outline-none border-none rounded-b-md py-2 px-4'
+                    placeholder='Ask me anything...'
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyDown={(e) => handleKeyDown(e)}
+                    disabled={isLoading}
+                    ref={inputRef}
+                    autoFocus
+                />
                 <TransparencyButton isIcon iconName='material-symbols:send' action={() => getAnswerFunc()} />
             </div>
         </div>

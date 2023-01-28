@@ -59,6 +59,7 @@ export default function Homepage() {
         setInputValue('')
         setPrompt(defaultPromot as string)
         setIsLoading(false)
+        setIsShowHint(false)
         if (inputRef) {
             inputRef.current?.focus()
         }
