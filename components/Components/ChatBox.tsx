@@ -17,9 +17,11 @@ interface ChatBoxTypes {
     chatBoxRef: RefObject<HTMLDivElement>;
     inputRef: RefObject<HTMLInputElement>;
     isRememberChat: boolean;
+    isShowHint: boolean;
+    setIsShowHint: Dispatch<SetStateAction<boolean>>;
     isShowHistory?: boolean;
-    isSelectLanguages?: boolean;
     setIsShowHistory?: Dispatch<SetStateAction<boolean>>;
+    isSelectLanguages?: boolean;
     title: string;
 }
 

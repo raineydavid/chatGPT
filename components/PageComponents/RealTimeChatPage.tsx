@@ -14,12 +14,15 @@ export default function RealTimeChatPage() {
     const [prompt, setPrompt] = useState<string>(defaultPromot as string);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [chatContent, setChatContent] = useState<ChatContentTypes[]>([]);
+    const [isShowHint, setIsShowHint] = useState<boolean>(false);
 
     const chatBoxRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
 
     const handleGetAnswer = async () => {
-        if (inputValue === '/reset') {
+        if (inputValue === '') {
+            setIsShowHint(true)
+        } else if (inputValue === '/reset') {
             handleClearHistory()
         } else if (inputValue) {
             try {
@@ -93,6 +96,8 @@ export default function RealTimeChatPage() {
                     inputValue={inputValue}
                     chatBoxRef={chatBoxRef}
                     inputRef={inputRef}
+                    isShowHint={isShowHint}
+                    setIsShowHint={setIsShowHint}
                     title='Real time chat'
                     isRememberChat
                 />

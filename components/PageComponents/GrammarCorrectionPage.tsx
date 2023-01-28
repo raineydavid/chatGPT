@@ -13,13 +13,16 @@ export default function GrammarCorrection() {
     const [inputValue, setInputValue] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [chatHistory, setChatHistory] = useState<ChatContentTypes[]>([]);
-    const [isShowHistory, setIsShowHistory] = useState<boolean>(false)
+    const [isShowHistory, setIsShowHistory] = useState<boolean>(false);
+    const [isShowHint, setIsShowHint] = useState<boolean>(false);
 
     const chatBoxRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
 
     const handleGetAnswer = async () => {
-        if (inputValue === '/reset') {
+        if (inputValue === '') {
+            setIsShowHint(true)
+        } else if (inputValue === '/reset') {
             handleClearHistory()
         } else if (inputValue === '/history') {
             setIsShowHistory(true)
@@ -86,6 +89,8 @@ export default function GrammarCorrection() {
                     isRememberChat={false}
                     isShowHistory={isShowHistory}
                     setIsShowHistory={setIsShowHistory}
+                    isShowHint={isShowHint}
+                    setIsShowHint={setIsShowHint}
                     title='Grammar Correction'
                 />
                 <div className='max-w-md text-sm'>
