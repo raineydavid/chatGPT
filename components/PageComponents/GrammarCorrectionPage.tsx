@@ -72,12 +72,12 @@ export default function GrammarCorrection() {
     }, [])
 
     return (
-        <div className='descSection w-full max-w-7xl flex flex-col justify-evenly'>
+        <div className='descSection w-full max-w-7xl flex flex-col justify-evenly gap-6 lg:gap-0 mt-6 lg:mt-0'>
             <div className='flex items-center gap-2'>
                 <Icon icon='fluent:text-grammar-wand-20-regular' className='text-purple-500 text-3xl' />
-                <div className={`${interB.className} text-3xl text-purple-500`}>Grammar Correction</div>
+                <div className={`${interB.className} text-[27px] sm:text-3xl text-purple-500`}>Grammar Correction</div>
             </div>
-            <div className='flex justify-around'>
+            <div className='flex flex-col lg:flex-row justify-around gap-4'>
                 <ChatBox
                     clearFunc={handleClearHistory}
                     getAnswerFunc={handleGetAnswer}
@@ -94,7 +94,7 @@ export default function GrammarCorrection() {
                     setIsShowHint={setIsShowHint}
                     title='Grammar Correction'
                 />
-                <div className='max-w-md text-sm'>
+                <div className='max-w-auto lg:max-w-md text-sm'>
                     <div className={`text-xl ${interB.className}`}>Prompt</div>
                     <div className={`${inter.className} flex flex-col rounded-xl p-3 px-5 mt-1 bg-[#3a0e1f73]`}>
                         <div>Correct this to standard English:</div><br />

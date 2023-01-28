@@ -65,9 +65,6 @@ export default function RealTimeChatPage() {
         if (inputRef) {
             inputRef.current?.focus()
         }
-        if (chatBoxRef) {
-            chatBoxRef.current?.scrollIntoView({ behavior: "smooth" });
-        }
     }, [JSON.stringify(chatContent)])
 
     useEffect(() => {
@@ -82,12 +79,12 @@ export default function RealTimeChatPage() {
     }, [])
 
     return (
-        <div className='descSection w-full max-w-7xl flex flex-col justify-evenly'>
+        <div className='descSection w-full max-w-7xl flex flex-col justify-evenly gap-6 lg:gap-0 mt-6 lg:mt-0'>
             <div className='flex items-center gap-2'>
                 <Icon icon='material-symbols:chat-bubble-outline-rounded' className='text-purple-500 text-3xl' />
                 <div className={`${interB.className} text-3xl text-purple-500`}>Real Time Chat</div>
             </div>
-            <div className='flex justify-around'>
+            <div className='flex flex-col lg:flex-row justify-around gap-4'>
                 <ChatBox
                     clearFunc={handleClearHistory}
                     getAnswerFunc={handleGetAnswer}
@@ -102,7 +99,7 @@ export default function RealTimeChatPage() {
                     title='Real time chat'
                     isRememberChat
                 />
-                <div className='max-w-md text-sm'>
+                <div className='max-w-auto lg:max-w-md text-sm'>
                     <div className={`text-xl ${interB.className}`}>Prompt</div>
                     <div className={`${inter.className} flex flex-col rounded-xl p-3 px-5 mt-1 bg-[#3a0e1f73]`}>
                         <div>The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.</div><br />

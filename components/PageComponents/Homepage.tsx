@@ -77,7 +77,7 @@ export default function Homepage() {
     }, [])
 
     return (
-        <div className='descSection relative max-w-8xl w-full py-12 flex flex-col-reverse lg:flex-row justify-between items-start lg:items-center gap-12 lg:gap-0'>
+        <div className='descSection relative max-w-8xl w-full pt-12 flex flex-col-reverse lg:flex-row justify-between items-start lg:items-center gap-6 sm:gap-12 lg:gap-0'>
             <div className='flex flex-col gap-8 w-2/5 min-w-full lg:min-w-[450px] xl:min-w-[550px]'>
                 <Title title='ChatGPT made easy' />
                 <p className={`${inter.className} text-slate-300 text-sm sm:text-base lg:text-sm xl:text-base`}><span className='font-bold'>ChatGPT</span> is a chatbot that was launched by <span className='font-bold'>OpenAI</span>, an artificial intelligence research and deployment company, in November 2022.</p>

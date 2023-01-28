@@ -15,6 +15,7 @@ export default function EnglishToOthersPage() {
     const [chatHistory, setChatHistory] = useState<ChatContentTypes[]>([]);
     const [isShowHistory, setIsShowHistory] = useState<boolean>(false);
     const [isShowHint, setIsShowHint] = useState<boolean>(false);
+    const [showSelectLanguages, setShowSelectLanguages] = useState<boolean>(false);
 
     const chatBoxRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
@@ -35,7 +36,7 @@ export default function EnglishToOthersPage() {
                 setIsLoading(true);
                 setInputValue('');
                 setIsShowHistory(false);
-                const res = await fetch(`/api/openai-grammar-correction`, {
+                const res = await fetch(`/api/openai-english-to-others`, {
                     body: JSON.stringify(defaultPromot + inputValue),
                     headers: {
                         'Content-Type': 'application/json'
@@ -72,12 +73,12 @@ export default function EnglishToOthersPage() {
     }, [])
 
     return (
-        <div className='descSection w-full max-w-7xl flex flex-col justify-evenly'>
+        <div className='descSection w-full max-w-7xl flex flex-col justify-evenly gap-6 lg:gap-0 mt-6 lg:mt-0'>
             <div className='flex items-center gap-2'>
-                <Icon icon='bi:translate' className='text-purple-500 text-3xl' />
-                <div className={`${interB.className} text-3xl text-purple-500`}>English to other Languages</div>
+                <Icon icon='bi:translate' className='text-purple-500 text-2xl' />
+                <div className={`${interB.className} text-[22px] sm:text-3xl text-purple-500`}>English to other Languages</div>
             </div>
-            <div className='flex justify-around'>
+            <div className='flex flex-col lg:flex-row justify-around gap-4'>
                 <ChatBox
                     clearFunc={handleClearHistory}
                     getAnswerFunc={handleGetAnswer}
@@ -92,10 +93,12 @@ export default function EnglishToOthersPage() {
                     setIsShowHistory={setIsShowHistory}
                     isShowHint={isShowHint}
                     setIsShowHint={setIsShowHint}
+                    showSelectLanguages={showSelectLanguages}
+                    setShowSelectLanguages={setShowSelectLanguages}
                     title='English to other languages'
                     isSelectLanguages
                 />
-                <div className='max-w-md text-sm'>
+                <div className='max-w-auto lg:max-w-md text-sm'>
                     <div className={`text-xl ${interB.className}`}>Prompt</div>
                     <div className={`${inter.className} flex flex-col rounded-xl p-3 px-5 mt-1 bg-[#3a0e1f73]`}>
                         <div>Translate this into 1. French, 2. Spanish and 3. Japanese:</div><br />

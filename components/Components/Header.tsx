@@ -11,7 +11,7 @@ export default function Header() {
     const router = useRouter();
     const pageName = router.pathname === '/' ? 'home' : router.pathname === '/examples' ? 'example' : 'sub-example';
     return (
-        <div className='max-w-8xl w-full flex flex-col sm:flex-row justify-between items-start sm:items-center h-16 z-10'>
+        <div className='max-w-8xl w-full flex flex-col sm:flex-row justify-between items-start sm:items-center h-28 sm:h-16 z-10'>
             <div className={`${kanit.className} flex items-center text-4xl xl:text-5xl text-slate-200 cursor-pointer`} onClick={() => router.push('/')}>
                 I
                 <Player
