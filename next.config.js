@@ -7,7 +7,8 @@ const nextConfig = {
     DEFAULT_CHAT_PROMPT: "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, specific, and very friendly.\n\n",
     DEFAULT_GRAMMAR_CORRECTION_PROMPT: 'Correct this to standard English:\n\n',
     DEFAULT_ENGLISH_TO_OTHERS: 'Translate this into ',
-    DEFAULT_MOVIE_TO_EMOJI: 'Convert movie titles into emoji.\n\nBack to the Future: 👨👴🚗🕒 \nBatman: 🤵🦇 \nTransformers: 🚗🤖 \n'
+    DEFAULT_MOVIE_TO_EMOJI: 'Convert movie titles into emoji.\n\nBack to the Future: 👨👴🚗🕒 \nBatman: 🤵🦇 \nTransformers: 🚗🤖 \n',
+    DEFAULT_JAVASCRIPT_HELPER: 'You: How do I combine arrays?\n JavaScript Chatbot: You can use the concat() method.\n You: '
   }
 }
 

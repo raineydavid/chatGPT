@@ -122,8 +122,10 @@ export default function ChatBox({
             }
             const result = handleFilterLangs('', JSON.parse(selectedLangs))
             setAllLanguages(result)
+        } else {
+            setAllLanguages(LanguageList)
         }
-    }, [])
+    }, [JSON.stringify(selectedLanguages)])
 
     useEffect(() => {
         if (inputRef) {
@@ -212,6 +214,13 @@ export default function ChatBox({
                             />
                             <div>{overview}</div>
                         </div>
+                    ) : isLoading ? (
+                        <Player
+                            autoplay
+                            loop
+                            src="https://assets1.lottiefiles.com/packages/lf20_fyye8szy.json"
+                            style={{ height: '50px', width: '50px' }}
+                        />
                     ) : showSelectLanguages ? (
                         <div className='flex flex-col gap-4'>
                             <div className='flex items-center gap-2'>
@@ -291,13 +300,6 @@ export default function ChatBox({
                             </div>
                             {isSelectLanguages && SelectLanguages}
                         </>
-                    ) : isLoading ? (
-                        <Player
-                            autoplay
-                            loop
-                            src="https://assets1.lottiefiles.com/packages/lf20_fyye8szy.json"
-                            style={{ height: '50px', width: '50px' }}
-                        />
                     ) : chatContent.length > 0 ? (
                         <>
                             {selectedLanguages && selectedLanguages.length > 0 && (
@@ -310,8 +312,8 @@ export default function ChatBox({
                                 </div>
                             )}
                             {isSelectLanguages && SelectLanguages}
-                            <div className='text-base text-center'><span className='font-bold'>You:</span> {chatContent[chatContent.length - 1].Human}</div>
-                            <div className='text-base text-center whitespace-pre-line'>{chatContent[chatContent.length - 1].AI}</div>
+                            <div className='text-base text-center'>{chatContent[chatContent.length - 1].Human}</div>
+                            <div className='text-base text-center whitespace-pre-line text-orange-200'>{chatContent[chatContent.length - 1].AI}</div>
                         </>
                     ) : (
                         <div className='w-full h-full flex flex-col items-center justify-center'>

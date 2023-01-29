@@ -43,8 +43,9 @@ export default function GrammarCorrection() {
                     method: 'POST'
                 });
                 const data = await res.json();
-                setChatHistory([...chatHistory, { Human: inputValue, AI: data }])
-                localStorage.setItem('grammarCorrectionHistory', JSON.stringify([...chatHistory, { Human: inputValue, AI: data }]))
+                const mainData = data.trimStart();
+                setChatHistory([...chatHistory, { Human: inputValue, AI: mainData }])
+                localStorage.setItem('grammarCorrectionHistory', JSON.stringify([...chatHistory, { Human: inputValue, AI: mainData }]))
                 setIsLoading(false);
             } catch {
                 handleGetAnswer();

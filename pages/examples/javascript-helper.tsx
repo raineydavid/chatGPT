@@ -1,17 +1,17 @@
 import Head from 'next/head'
 import React from 'react'
-import { MovieToEmojipage } from '@/components/PageComponents'
+import { JavaScriptHelperChatbotpage } from '@/components/PageComponents'
 
-export default function MovieToEmoji() {
+export default function JavaScriptHelperChatbot() {
     return (
         <>
             <Head>
-                <title>ChatGPT | Movie To Emoji</title>
+                <title>ChatGPT | JavaScript Helper Chatbot</title>
                 <meta name="description" content="You can enjoy high quality, artificial intelligence chatbots." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <MovieToEmojipage />
+            <JavaScriptHelperChatbotpage />
         </>
     )
 }
