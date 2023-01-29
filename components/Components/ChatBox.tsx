@@ -284,8 +284,8 @@ export default function ChatBox({
                                     <div>No History!</div>
                                 ) : chatContent.map((chat, index) => (
                                     <div key={index}>
-                                        <div className='text-green-600'><span className='font-bold'>You:</span> {chat.Human}</div>
-                                        <div className='text-yellow-600'><span className='font-bold'>AI:</span> {chat.AI}</div>
+                                        <div className='text-green-600'>{chat.Human}</div>
+                                        <div className='text-yellow-600 whitespace-pre-line'>{chat.AI}</div>
                                     </div>
                                 ))}
                             </div>
@@ -311,7 +311,7 @@ export default function ChatBox({
                             )}
                             {isSelectLanguages && SelectLanguages}
                             <div className='text-base text-center'><span className='font-bold'>You:</span> {chatContent[chatContent.length - 1].Human}</div>
-                            <div className='text-base text-center'><span className='font-bold'>AI:</span> {chatContent[chatContent.length - 1].AI}</div>
+                            <div className='text-base text-center whitespace-pre-line'>{chatContent[chatContent.length - 1].AI}</div>
                         </>
                     ) : (
                         <div className='w-full h-full flex flex-col items-center justify-center'>

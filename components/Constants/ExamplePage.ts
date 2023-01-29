@@ -20,26 +20,26 @@ export const ExampleList: ExampleListTypes[] = [
         icon: 'bi:translate',
         link: '/examples/english-to-others'
     },
-    {
-        name: 'Python to natural language',
-        icon: 'teenyicons:python-outline',
-        link: '/examples/python-to-natural'
-    },
+    // {
+    //     name: 'Python to natural language',
+    //     icon: 'teenyicons:python-outline',
+    //     link: '/examples/python-to-natural'
+    // },
     {
         name: 'Movie to Emoji',
         icon: 'mdi:emoji-happy-outline',
         link: '/examples/movie-to-emoji'
     },
-    {
-        name: 'Calculate Time Complexity',
-        icon: 'ic:sharp-access-time',
-        link: '/examples/calculate-time-complexity'
-    },
-    {
-        name: 'Python bug fixer',
-        icon: 'ion:bug',
-        link: '/examples/python-bug-fixer'
-    },
+    // {
+    //     name: 'Calculate Time Complexity',
+    //     icon: 'ic:sharp-access-time',
+    //     link: '/examples/calculate-time-complexity'
+    // },
+    // {
+    //     name: 'Python bug fixer',
+    //     icon: 'ion:bug',
+    //     link: '/examples/python-bug-fixer'
+    // },
     {
         name: 'JavaScript helper chatbot',
         icon: 'mdi:cloud-question',
@@ -55,11 +55,11 @@ export const ExampleList: ExampleListTypes[] = [
         icon: 'mdi:sql-query',
         link: '/examples/sql-request'
     },
-    {
-        name: 'JavaScript to Python',
-        icon: 'material-symbols:code-blocks-outline-sharp',
-        link: '/examples/javascript-to-python'
-    },
+    // {
+    //     name: 'JavaScript to Python',
+    //     icon: 'material-symbols:code-blocks-outline-sharp',
+    //     link: '/examples/javascript-to-python'
+    // },
     {
         name: 'Mood to color',
         icon: 'ic:round-color-lens',
