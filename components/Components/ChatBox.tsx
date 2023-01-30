@@ -3,7 +3,7 @@ import React, { Dispatch, RefObject, SetStateAction, useEffect, useState } from 
 import { Player } from '@lottiefiles/react-lottie-player';
 import { Icon } from '@iconify/react';
 import { TransparencyButton } from '../ButtonComponents';
-import { ChatContentTypes } from '../PageComponents/Homepage';
+import { MoodChatContentTypes } from '../PageComponents/MoodToColorpage';
 import { LanguageList } from '../Constants/LanguageList';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -12,7 +12,7 @@ interface ChatBoxTypes {
     clearFunc: () => void;
     getAnswerFunc: () => void;
     setInputValue: Dispatch<SetStateAction<string>>;
-    chatContent: ChatContentTypes[];
+    chatContent: MoodChatContentTypes[];
     isLoading: boolean;
     inputValue: string;
     chatBoxRef: RefObject<HTMLDivElement>;
@@ -27,6 +27,7 @@ interface ChatBoxTypes {
     selectedLanguages?: string[];
     setSelectedLanguages?: Dispatch<SetStateAction<string[]>>;
     isSelectLanguages?: boolean;
+    moodColor?: string;
     title: string;
 }
 
@@ -49,6 +50,7 @@ export default function ChatBox({
     selectedLanguages,
     setSelectedLanguages,
     isSelectLanguages,
+    moodColor,
     title
 }: ChatBoxTypes) {
     const overview = 'I am prepared to speak with you. Fire away!';
@@ -292,9 +294,9 @@ export default function ChatBox({
                                 {chatContent.length === 0 ? (
                                     <div>No History!</div>
                                 ) : chatContent.map((chat, index) => (
-                                    <div key={index}>
-                                        <div className='text-green-600'>{chat.Human}</div>
-                                        <div className='text-yellow-600 whitespace-pre-line'>{chat.AI}</div>
+                                    <div className='flex flex-col gap-1' key={index}>
+                                        <div>{chat.Human}</div>
+                                        <div className={`whitespace-pre-line ${moodColor ? 'p-2 px-4 rounded-full' : 'text-orange-200'}`} style={{ backgroundColor: chat.Color }}>{chat.AI}</div>
                                     </div>
                                 ))}
                             </div>
@@ -313,7 +315,7 @@ export default function ChatBox({
                             )}
                             {isSelectLanguages && SelectLanguages}
                             <div className='text-base text-center'>{chatContent[chatContent.length - 1].Human}</div>
-                            <div className='text-base text-center whitespace-pre-line text-orange-200'>{chatContent[chatContent.length - 1].AI}</div>
+                            <div className={`text-base text-center whitespace-pre-line ${!moodColor ? 'text-orange-200' : 'p-2 px-4 rounded-full'}`} style={moodColor !== '' ? { backgroundColor: moodColor } : { backgroundColor: 'transparent' }}>{chatContent[chatContent.length - 1].AI}</div>
                         </>
                     ) : (
                         <div className='w-full h-full flex flex-col items-center justify-center'>

@@ -6,7 +6,7 @@ export default function AirportCode() {
     return (
         <>
             <Head>
-                <title>ChatGPT | English to other languages</title>
+                <title>ChatGPT | Airport Code Exractor</title>
                 <meta name="description" content="You can enjoy high quality, artificial intelligence chatbots." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
