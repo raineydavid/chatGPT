@@ -8,3 +8,4 @@ export { default as JavaScriptHelperChatbotpage } from './JavaScriptHelperChatbo
 export { default as AirportCodePage } from './AirportCodePage'
 export { default as SQLRequestPage } from './SQLRequestpage'
 export { default as MoodToColorPage } from './MoodToColorpage'
+export { default as CreateStudyNotespage } from './CreateStudyNotespage'

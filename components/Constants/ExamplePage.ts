@@ -65,21 +65,21 @@ export const ExampleList: ExampleListTypes[] = [
         icon: 'ic:round-color-lens',
         link: '/examples/mood-to-color'
     },
-    {
-        name: 'Notes to summary',
-        icon: 'material-symbols:note-alt-outline-rounded',
-        link: '/examples/notes-to-summary'
-    },
-    {
-        name: 'Recipe creator',
-        icon: 'mdi:cook',
-        link: '/examples/recipe-creator'
-    },
-    {
-        name: 'Review creator',
-        icon: 'pajamas:review-list',
-        link: '/examples/review-creator'
-    },
+    // {
+    //     name: 'Notes to summary',
+    //     icon: 'material-symbols:note-alt-outline-rounded',
+    //     link: '/examples/notes-to-summary'
+    // },
+    // {
+    //     name: 'Recipe creator',
+    //     icon: 'mdi:cook',
+    //     link: '/examples/recipe-creator'
+    // },
+    // {
+    //     name: 'Review creator',
+    //     icon: 'pajamas:review-list',
+    //     link: '/examples/review-creator'
+    // },
     {
         name: 'Create study notes',
         icon: 'uil:comment-notes',

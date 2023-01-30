@@ -188,7 +188,7 @@ export default function ChatBox({
                     </div>
                 </div>
             </div>
-            <div className={`h-[450px] relative bg-[#00000080] p-5 text-slate-300 flex flex-col gap-3 overflow-auto text-sm ${!isRememberChat && !isShowHistory && !isLoading && !showSelectLanguages && chatContent.length > 0 && 'flex items-center justify-center'}`} ref={chatBoxRef}>
+            <div className={`h-[450px] relative bg-[#00000080] p-5 text-slate-300 flex flex-col gap-3 overflow-auto text-sm`} ref={chatBoxRef}>
                 {isRememberChat ?
                     chatContent.length > 0 ? (
                         chatContent.map((chat, index) => (
