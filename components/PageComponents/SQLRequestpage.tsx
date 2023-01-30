@@ -102,7 +102,7 @@ export default function SQLRequestPage() {
                     </div>
                     <div className={`text-xl mt-5 ${interB.className}`}>Response</div>
                     <div className={`${inter.className} rounded-xl p-3 px-5 mt-1 bg-[#0e3a0f73]`}>
-                        SELECT * FROM users WHERE state = 'California' AND credits &gt; 1000;
+                        SELECT * FROM users WHERE state = &apos;California&apos; AND credits &gt; 1000;
                     </div>
                     <div className={`text-xl mt-5 ${interB.className}`}>Keyword</div>
                     <div className={`${inter.className} rounded-xl p-3 px-5 mt-1 bg-[#3a2c0e73]`}>

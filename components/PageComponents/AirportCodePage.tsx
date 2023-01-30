@@ -99,9 +99,9 @@ export default function AirportCodePage() {
                     <div className={`text-xl ${interB.className}`}>Prompt</div>
                     <div className={`${inter.className} flex flex-col rounded-xl p-3 px-5 mt-1 bg-[#3a0e1f73]`}>
                         <div>Extract the airport codes from this text:</div><br />
-                        <div>Text: "I want to fly from Los Angeles to Miami."</div>
+                        <div>Text: &quot;I want to fly from Los Angeles to Miami.&quot;</div>
                         <div>Airport codes: LAX, MIA</div><br />
-                        <div>Text: "I want to fly from Orlando to Boston"</div>
+                        <div>Text: &quot;I want to fly from Orlando to Boston&quot;</div>
                         <div>Airport codes:</div>
                     </div>
                     <div className={`text-xl mt-5 ${interB.className}`}>Response</div>
