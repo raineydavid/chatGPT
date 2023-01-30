@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+OpenAI's ChatGPT chatbot has been gaining a lot of popularity lately. It is loved for its powerful AI chat features, which have made it popular with users worldwide.
 
 ## Getting Started
 
