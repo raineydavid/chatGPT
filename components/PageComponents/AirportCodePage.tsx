@@ -7,8 +7,8 @@ import { ChatContentTypes } from './Homepage'
 const interB = Inter({ subsets: ['latin'], weight: '900' })
 const inter = Inter({ subsets: ['latin'], weight: '400' })
 
-export default function GrammarCorrectionPage() {
-    const defaultPromot = process.env.DEFAULT_GRAMMAR_CORRECTION_PROMPT;
+export default function AirportCodePage() {
+    const defaultPromot = process.env.DEFAULT_AIRPORT_CODE;
 
     const [inputValue, setInputValue] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -35,7 +35,7 @@ export default function GrammarCorrectionPage() {
                 setIsLoading(true);
                 setInputValue('');
                 setIsShowHistory(false);
-                const res = await fetch(`/api/openai-grammar-correction`, {
+                const res = await fetch(`/api/openai-airport-code`, {
                     body: JSON.stringify(defaultPromot + inputValue),
                     headers: {
                         'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export default function GrammarCorrectionPage() {
                 const data = await res.json();
                 const mainData = data.trimStart();
                 setChatHistory([...chatHistory, { Human: inputValue, AI: mainData }])
-                localStorage.setItem('grammarCorrectionHistory', JSON.stringify([...chatHistory, { Human: inputValue, AI: mainData }]))
+                localStorage.setItem('airportcode', JSON.stringify([...chatHistory, { Human: inputValue, AI: mainData }]))
                 setIsLoading(false);
             } catch {
                 handleGetAnswer();
@@ -54,7 +54,7 @@ export default function GrammarCorrectionPage() {
     }
 
     const handleClearHistory = () => {
-        localStorage.removeItem('grammarCorrectionHistory')
+        localStorage.removeItem('airportcode')
         setChatHistory([])
         setInputValue('')
         setIsLoading(false)
@@ -66,7 +66,7 @@ export default function GrammarCorrectionPage() {
     }
 
     useEffect(() => {
-        const rememberHistory = localStorage.getItem('grammarCorrectionHistory')
+        const rememberHistory = localStorage.getItem('airportcode')
         if (rememberHistory && rememberHistory.length > 0) {
             setChatHistory(JSON.parse(rememberHistory))
         }
@@ -75,8 +75,8 @@ export default function GrammarCorrectionPage() {
     return (
         <div className='descSection w-full max-w-7xl flex flex-col justify-evenly gap-6 lg:gap-0 mt-6 lg:mt-0'>
             <div className='flex items-center gap-2'>
-                <Icon icon='fluent:text-grammar-wand-20-regular' className='text-purple-500 text-3xl' />
-                <div className={`${interB.className} text-[27px] sm:text-3xl text-purple-500`}>Grammar Correction</div>
+                <Icon icon='mdi:local-airport' className='text-purple-500 text-3xl' />
+                <div className={`${interB.className} text-[27px] sm:text-3xl text-purple-500`}>Airport code extractor</div>
             </div>
             <div className='flex flex-col lg:flex-row justify-around gap-4'>
                 <ChatBox
@@ -93,17 +93,20 @@ export default function GrammarCorrectionPage() {
                     setIsShowHistory={setIsShowHistory}
                     isShowHint={isShowHint}
                     setIsShowHint={setIsShowHint}
-                    title='Grammar Correction'
+                    title='Airport code extractor'
                 />
                 <div className='max-w-auto lg:max-w-md text-sm'>
                     <div className={`text-xl ${interB.className}`}>Prompt</div>
                     <div className={`${inter.className} flex flex-col rounded-xl p-3 px-5 mt-1 bg-[#3a0e1f73]`}>
-                        <div>Correct this to standard English:</div><br />
-                        <div>She no went to the market.</div>
+                        <div>Extract the airport codes from this text:</div><br />
+                        <div>Text: "I want to fly from Los Angeles to Miami."</div>
+                        <div>Airport codes: LAX, MIA</div><br />
+                        <div>Text: "I want to fly from Orlando to Boston"</div>
+                        <div>Airport codes:</div>
                     </div>
                     <div className={`text-xl mt-5 ${interB.className}`}>Response</div>
                     <div className={`${inter.className} rounded-xl p-3 px-5 mt-1 bg-[#0e3a0f73]`}>
-                        She did not go to the market.
+                        MCO, BOS
                     </div>
                     <div className={`text-xl mt-5 ${interB.className}`}>Keyword</div>
                     <div className={`${inter.className} rounded-xl p-3 px-5 mt-1 bg-[#3a2c0e73]`}>

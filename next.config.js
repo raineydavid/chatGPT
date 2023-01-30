@@ -8,7 +8,8 @@ const nextConfig = {
     DEFAULT_GRAMMAR_CORRECTION_PROMPT: 'Correct this to standard English:\n\n',
     DEFAULT_ENGLISH_TO_OTHERS: 'Translate this into ',
     DEFAULT_MOVIE_TO_EMOJI: 'Convert movie titles into emoji.\n\nBack to the Future: 👨👴🚗🕒 \nBatman: 🤵🦇 \nTransformers: 🚗🤖 \n',
-    DEFAULT_JAVASCRIPT_HELPER: 'You: How do I combine arrays?\n JavaScript Chatbot: You can use the concat() method.\n You: '
+    DEFAULT_JAVASCRIPT_HELPER: 'You: How do I combine arrays?\n JavaScript Chatbot: You can use the concat() method.\n You: ',
+    DEFAULT_AIRPORT_CODE: 'Extract the airport codes from this text:\n\nText: \"I want to fly from Los Angeles to Miami.\"\nAirport codes: LAX, MIA\n\nText: \"I want to fly from Orlando to Boston\"\nAirport codes:'
   }
 }
 

@@ -93,7 +93,7 @@ export default function JavaScriptHelperChatbotpage() {
                     setIsShowHistory={setIsShowHistory}
                     isShowHint={isShowHint}
                     setIsShowHint={setIsShowHint}
-                    title='Grammar Correction'
+                    title='JavaScript Helper Chatbot'
                 />
                 <div className='max-w-auto lg:max-w-md text-sm'>
                     <div className={`text-xl ${interB.className}`}>Prompt</div>

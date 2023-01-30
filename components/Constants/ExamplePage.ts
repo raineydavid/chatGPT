@@ -48,7 +48,7 @@ export const ExampleList: ExampleListTypes[] = [
     {
         name: 'Airport code extractor',
         icon: 'mdi:local-airport',
-        link: '/examples/airport-code=extractor'
+        link: '/examples/airport-code'
     },
     {
         name: 'SQL request',

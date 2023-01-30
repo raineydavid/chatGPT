@@ -92,7 +92,7 @@ export default function MovieToEmojipage() {
                     setIsShowHistory={setIsShowHistory}
                     isShowHint={isShowHint}
                     setIsShowHint={setIsShowHint}
-                    title='Grammar Correction'
+                    title='Movie to Emoji'
                 />
                 <div className='max-w-auto lg:max-w-md text-sm'>
                     <div className={`text-xl ${interB.className}`}>Prompt</div>
