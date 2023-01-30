@@ -1,10 +1,10 @@
-interface ExampleListTypes {
+interface TextExampleListTypes {
     name: string;
     icon: string;
     link: string;
 }
 
-export const ExampleList: ExampleListTypes[] = [
+export const TextExampleList: TextExampleListTypes[] = [
     {
         name: 'Real time chat',
         icon: 'material-symbols:chat-bubble-outline-rounded',
@@ -84,5 +84,13 @@ export const ExampleList: ExampleListTypes[] = [
         name: 'Create study notes',
         icon: 'uil:comment-notes',
         link: '/examples/create-study-notes'
+    }
+]
+
+export const ImageExampleList: TextExampleListTypes[] = [
+    {
+        name: 'Image Generator',
+        icon: 'material-symbols:image-search-sharp',
+        link: '/examples/image-generator'
     }
 ]
